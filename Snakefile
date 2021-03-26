@@ -4,13 +4,12 @@ rule plotype_caller:
         ref="/LAB-DATA/BiRD/resources/species/human/cng.fr/hs37d5/hs37d5_all_chr.fasta"
     output:
         gvcf="/SCRATCH-BIRD/users/karastoo/calls/{sample}.g.vcf",
-    log:
-        "logs/gatk/haplotypecaller/{sample}.log"
+    
     params:
         extra="",  # optional
         java_opts="", # optional
     shell:
         "gatk --java-options '{java_opts}' HaplotypeCaller {extra} "
-        "-R {snakemake.input.ref} {crams} "
-        "-ERC GVCF {bam_output} "
-        "-O {snakemake.output.gvcf} {known} {log}"
+        "-R {snakemake.input.ref}  "
+        "-ERC GVCF "
+        "-O {snakemake.output.gvcf} "
