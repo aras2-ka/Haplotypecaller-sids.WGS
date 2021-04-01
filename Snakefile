@@ -9,14 +9,14 @@ SAMPLES = {
 print(SAMPLES.keys())
 
 rule all:
-    input: expand("/SCRATCH-BIRD/users/karastoo/calls/{sample}.g.vcf", sample = SAMPLES.keys())
+    input: expand("/SCRATCH-BIRD/users/karastoo/calls/{sample}.g.vcf.gz", sample = SAMPLES.keys())
 
 rule haplotype_caller:
     input:
         cram=lambda wildcards: SAMPLES[wildcards.sample],
         ref="/LAB-DATA/BiRD/resources/species/human/cng.fr/hs37d5/hs37d5_all_chr.fasta"
     output:
-        gvcf="/SCRATCH-BIRD/users/karastoo/calls/{sample}.g.vcf"
+        gvcf="/SCRATCH-BIRD/users/karastoo/calls/{sample}.g.vcf.gz"
     params:
         tmpdir="/SCRATCH-BIRD/users/karastoo/calls/"
     shell:	"""
